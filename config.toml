@@ -1,0 +1,156 @@
+baseURL = 'https://blog.alexander.social/'
+languageCode = 'en-us'
+title = 'Home'
+
+[deployment]
+[[deployment.targets]]
+name = "blog.alexander.social"
+URL = "s3://blog.alexander.social?endpoint=minio.alexander.social&s3ForcePathStyle=true"
+
+[[deployment.matchers]]
+# Cache static assets for 1 year.
+pattern = "^.+\\.(js|css|svg|ttf)$"
+cacheControl = "max-age=31536000, no-transform, public"
+gzip = true
+
+[[deployment.matchers]]
+pattern = "^.+\\.(png|jpg)$"
+cacheControl = "max-age=31536000, no-transform, public"
+gzip = false
+
+[[deployment.matchers]]
+# Set custom content type for /sitemap.xml
+pattern = "^sitemap\\.xml$"
+contentType = "application/xml"
+gzip = true
+
+[[deployment.matchers]]
+pattern = "^.+\\.(html|xml|json)$"
+gzip = true
+
+[module]
+[[module.imports]]
+  #path = 'github.com/nodejh/hugo-theme-mini'
+  path = 'github.com/roninro/hugo-theme-puppet'
+
+copyright = ""
+paginate = 3
+languageCode = "en"
+defaultContentLanguage = "en"
+
+hasCJKLanguage = true
+enableInlineShortcodes = true
+enableEmoji = true
+# prevent build failures when using Hugo's Instagram shortcode due to deprecated Instagram API.
+# See https://github.com/gohugoio/hugo/issues/7228#issuecomment-714490456
+ignoreErrors = ["error-remote-getjson"]
+
+disqusShortname = ""
+googleAnalytics = ""
+
+[outputs]
+home = ["HTML", "JSON", "RSS"]
+
+# prevent build failures when using Hugo's template _internal/opengraph.html 
+[taxonomies]
+category = "categories"
+tag = "tags"
+series = "series"
+
+[markup]
+[markup.highlight]
+noClasses = true
+codeFences = true
+guessSyntax = true
+lineNos = true
+lineNumbersInTable = false
+style = "dracula"
+
+[markup.goldmark.renderer]
+unsafe = true
+
+[menu]
+[[menu.main]]
+identifier = "home"
+name = "Home"
+url = "/"
+weight = -100
+[[menu.main]]
+identifier = "archive"
+name = "Archive"
+url = "/archive/"
+weight = 10
+[[menu.main]]
+identifier = "k8s"
+name = "Kubernetes"
+url = "/series/kubernetes/"
+weight = 20
+[[menu.main]]
+identifier = "about"
+name = "About"
+url = "/about/"
+weight = 50
+#[[menu.main]]
+#identifier = "github"
+#name = "Github"
+#url = "https://github.com/roninro/hugo-theme-puppet/"
+#weight = 100
+
+
+[params]
+author = "Matt Alexander"
+description = "A blog about programming, homelabs, or whatever else I feel like"
+keywords = "blog,developer,personal"
+img_home = "img/banjo_frets_bg.png"
+img_404 = "img/404-bg.jpg"
+
+useFaviconGenerator = true
+
+custom_js = []
+custom_css = ["css/custom.css"] # Add your file to assets folder  [assets/css/custom.css]
+
+[params.sidebar]
+enable = true
+gravatarEmail = "gravatar@rendil.org"
+# Overwritten by your gravatar image if `gravatarEmail` is filled
+avatar = ""
+bio = "Software engineer, formerly @ Twitter. Dungeon master. Lover of food. Board game geek. He/Him."
+
+[params.social]
+rss = true
+[params.social.twitter]
+weight = 10
+format = "https://twitter.com/%v"
+id = "matta"
+[params.social.mastodon]
+weight = 9
+format = "https://alexander.social/%v"
+id = "@matt"
+rel = "me"
+[params.social.github]
+weight = 8
+format = "https://github.com/%v"
+id = "rendil"
+[params.social.linkedin]
+weight = 7
+format = "https://linkedin.com/in/%v"
+id = "mattalexander"
+
+#[[params.friends]]
+#name = "John Doe"
+#url = "https://gohugo.io"
+
+#[[params.friends]]
+#name = "John Doe"
+#url = "https://gohugo.io"
+
+# See https://giscus.app/
+[params.giscus]
+enable = true
+repo = "rendil/blog.alexander.social"
+repo_id = "R_kgDOI5K1aw"
+category = "General"
+category_id = "DIC_kwDOHuvyh84CQjDo"
+input_position = "top"
+theme = "light_tritanopia"
+lang = "en"
