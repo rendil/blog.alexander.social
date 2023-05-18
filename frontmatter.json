@@ -7,41 +7,48 @@
       "previewPath": null,
       "fields": [
         {
-          "title": "Title",
+          "title": "title",
           "name": "title",
           "type": "string"
         },
         {
-          "title": "Description",
-          "name": "description",
+          "title": "date",
+          "name": "date",
+          "type": "fields",
+          "fields": []
+        },
+        {
+          "title": "header_img",
+          "name": "header_img",
           "type": "string"
         },
         {
-          "title": "Publishing date",
-          "name": "date",
-          "type": "datetime",
-          "default": "{{now}}",
-          "isPublishDate": true
+          "title": "toc",
+          "name": "toc",
+          "type": "datetime"
         },
         {
-          "title": "Content preview",
-          "name": "preview",
-          "type": "image"
-        },
-        {
-          "title": "Is in draft",
-          "name": "draft",
-          "type": "draft"
-        },
-        {
-          "title": "Tags",
+          "title": "tags",
           "name": "tags",
           "type": "tags"
         },
         {
-          "title": "Categories",
+          "title": "categories",
           "name": "categories",
           "type": "categories"
+        },
+        {
+          "title": "series",
+          "name": "series",
+          "type": "choice",
+          "choices": [
+            "Kubernetes"
+          ]
+        },
+        {
+          "title": "comment",
+          "name": "comment",
+          "type": "datetime"
         }
       ]
     }

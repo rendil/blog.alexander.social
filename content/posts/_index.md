@@ -1,4 +1,4 @@
 ---
 title: "Posts"
-author: "Hugo Authors"
+author: "Matt Alexander"
 ---

@@ -1,3 +1,5 @@
 {
-    "frontMatter.preview.host": "http://localhost:1313"
+    "frontMatter.preview.host": "http://localhost:1313",
+    "[markdown]": {
+    }
 }

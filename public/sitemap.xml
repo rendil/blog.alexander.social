@@ -26,8 +26,14 @@
     <loc>https://blog.alexander.social/tags/</loc>
     <lastmod>2023-02-04T07:13:41+00:00</lastmod>
   </url><url>
+    <loc>https://blog.alexander.social/series/featureswitches/</loc>
+    <lastmod>2022-08-09T07:38:30+00:00</lastmod>
+  </url><url>
     <loc>https://blog.alexander.social/series/kubernetes/</loc>
     <lastmod>2022-08-09T15:38:30+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.alexander.social/posts/feature-switches-intro/</loc>
+    <lastmod>2022-08-09T07:38:30+00:00</lastmod>
   </url><url>
     <loc>https://blog.alexander.social/posts/getting-started/</loc>
     <lastmod>2022-08-09T15:38:30+08:00</lastmod>

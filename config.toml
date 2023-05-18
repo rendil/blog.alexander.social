@@ -80,10 +80,15 @@ identifier = "archive"
 name = "Archive"
 url = "/archive/"
 weight = 10
+# [[menu.main]]
+# identifier = "k8s"
+# name = "Kubernetes"
+# url = "/series/kubernetes/"
+# weight = 20
 [[menu.main]]
-identifier = "k8s"
-name = "Kubernetes"
-url = "/series/kubernetes/"
+identifier = "feature-switches"
+name = "Feature Switches"
+url = "/series/feature-switches/"
 weight = 20
 [[menu.main]]
 identifier = "about"

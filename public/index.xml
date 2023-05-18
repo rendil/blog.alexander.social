@@ -17,6 +17,17 @@
     </item>
     
     <item>
+      <title>Let&#39;s Build A Feature Switch Rules Engine - Part 1</title>
+      <link>https://blog.alexander.social/posts/feature-switches-intro/</link>
+      <pubDate>Tue, 09 Aug 2022 07:38:30 +0000</pubDate>
+      
+      <guid>https://blog.alexander.social/posts/feature-switches-intro/</guid>
+      <description>In any sufficiently large system (and honestly, plenty of smaller ones), it can be useful to be able to turn features on and off, ramp up new features slowly, or disable features for specific devices or users.
+This is the first in a series of posts where we&amp;rsquo;ll build a feature switch rules engine.
+So, what is a feature switch? We&amp;rsquo;ll define it as a key-value pair where the key is a string and the value is a simple primitive type (e.</description>
+    </item>
+    
+    <item>
       <title>Puppet - Getting Started</title>
       <link>https://blog.alexander.social/posts/getting-started/</link>
       <pubDate>Tue, 09 Aug 2022 15:38:30 +0800</pubDate>
