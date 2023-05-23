@@ -1,5 +1,5 @@
 +++
-title = "Let's Build A Feature Switch Rules Engine - Part 1"
+title = "Let's Build A Feature Switch Rules Engine"
 date = "2023-05-18T20:16:47.433Z"
 header_img = ""
 toc = "2023-05-18T20:16:47.433Z"

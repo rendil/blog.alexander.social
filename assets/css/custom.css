@@ -1,3 +1,40 @@
 .intro-header .site-heading {
     padding: 55px 0;
 }
+
+.post-container h1 {
+    margin: 10px 0 10px;
+    line-height: 1.2;
+}
+.post-container h2 {
+    margin: 10px 0 10px;
+    line-height: 1.2;
+}
+.post-container h3 {
+    margin: 10px 0 10px;
+    line-height: 1.2;
+}
+.post-container h4 {
+    margin: 10px 0 10px;
+    line-height: 1.2;
+}
+.post-container h5 {
+    margin: 10px 0 10px;
+    line-height: 1.2;
+}
+.post-container h6 {
+    margin: 10px 0 10px;
+    line-height: 1.2;
+}
+.post-container figure img {
+    width: auto;
+}
+.post-container p {
+    margin: 20px 0;
+}
+.post-container ol {
+    margin-bottom: 20px;
+}
+.post-container ul {
+    margin-bottom: 20px;
+}
