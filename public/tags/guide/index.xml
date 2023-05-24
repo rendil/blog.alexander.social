@@ -6,34 +6,27 @@
     <description>Recent content in guide on Home</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 04 Feb 2023 07:13:41 +0000</lastBuildDate><atom:link href="https://blog.alexander.social/tags/guide/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 22 May 2023 20:16:47 +0000</lastBuildDate><atom:link href="https://blog.alexander.social/tags/guide/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Hello World</title>
-      <link>https://blog.alexander.social/posts/hello-world/</link>
-      <pubDate>Sat, 04 Feb 2023 07:13:41 +0000</pubDate>
+      <title>Feature Switch Rule Definitions</title>
+      <link>https://blog.alexander.social/posts/feature-switches-rule-definitions/</link>
+      <pubDate>Mon, 22 May 2023 20:16:47 +0000</pubDate>
       
-      <guid>https://blog.alexander.social/posts/hello-world/</guid>
-      <description>This is a test.</description>
+      <guid>https://blog.alexander.social/posts/feature-switches-rule-definitions/</guid>
+      <description>Feature switch syntax A feature switch can be defined in many different ways, each with their own pros and cons.
+Before deciding on what a feature switch looks like, you&amp;rsquo;ll probably want to ask yourself a few questions:
+Do I want to store feature switches in a database or on a filesystem (eg, in git)?
+Database git Propagation Immediate, automatic Needs to be built Audit trail Needs to be built Automatic Code review Needs to be built Automatic (if already setup for other git changes) Local tests Requires dev DB Uses local files A database is automatically distributed, making the switches accessible anywhere the database can be accessed.</description>
     </item>
     
     <item>
-      <title>Let&#39;s Build A Feature Switch Rules Engine - Part 1</title>
+      <title>Let&#39;s Build A Feature Switch Rules Engine</title>
       <link>https://blog.alexander.social/posts/feature-switches-intro/</link>
-      <pubDate>Tue, 09 Aug 2022 07:38:30 +0000</pubDate>
+      <pubDate>Thu, 18 May 2023 20:16:47 +0000</pubDate>
       
       <guid>https://blog.alexander.social/posts/feature-switches-intro/</guid>
-      <description>In any sufficiently large system (and honestly, plenty of smaller ones), it can be useful to be able to turn features on and off, ramp up new features slowly, or disable features for specific devices or users.
-This is the first in a series of posts where we&amp;rsquo;ll build a feature switch rules engine.
-So, what is a feature switch? We&amp;rsquo;ll define it as a key-value pair where the key is a string and the value is a simple primitive type (e.</description>
-    </item>
-    
-    <item>
-      <title>Puppet - Getting Started</title>
-      <link>https://blog.alexander.social/posts/getting-started/</link>
-      <pubDate>Tue, 09 Aug 2022 15:38:30 +0800</pubDate>
-      
-      <guid>https://blog.alexander.social/posts/getting-started/</guid>
-      <description>&lt;p&gt;Puppet is a responsive, simple and clean &lt;a href=&#34;https://gohugo.io/&#34; target=&#34;_blank&#34;&gt;Hugo&lt;/a&gt; theme based on the &lt;a href=&#34;https://github.com/Huxpro/huxpro.github.io&#34; target=&#34;_blank&#34;&gt;Huxblog Jekyll theme&lt;/a&gt;.&lt;/p&gt;</description>
+      <description>Intro In any sufficiently large system (and honestly, plenty of smaller ones), it can be useful to be able to turn features on and off, ramp up new features slowly, or disable features for specific devices or users. To do this, most systems use feature switches (also known as feature flags or feature toggles).
+This is the first in a series of posts where we&amp;rsquo;ll build a feature switch rules engine.</description>
     </item>
     
   </channel>

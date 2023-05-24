@@ -2,47 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://blog.alexander.social/tags/documentation/</loc>
-    <lastmod>2023-02-04T07:13:41+00:00</lastmod>
+    <loc>https://blog.alexander.social/posts/feature-switches-rule-definitions/</loc>
+    <lastmod>2023-05-22T20:16:47+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://blog.alexander.social/series/feature-switches/</loc>
+    <lastmod>2023-05-22T20:16:47+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://blog.alexander.social/tags/feature-switches/</loc>
+    <lastmod>2023-05-22T20:16:47+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url><url>
     <loc>https://blog.alexander.social/tags/guide/</loc>
-    <lastmod>2023-02-04T07:13:41+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.alexander.social/posts/hello-world/</loc>
-    <lastmod>2023-02-04T07:13:41+00:00</lastmod>
+    <lastmod>2023-05-22T20:16:47+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url><url>
     <loc>https://blog.alexander.social/</loc>
-    <lastmod>2023-02-04T07:13:41+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.alexander.social/series/k8s/</loc>
-    <lastmod>2023-02-04T07:13:41+00:00</lastmod>
+    <lastmod>2023-05-22T20:16:47+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url><url>
     <loc>https://blog.alexander.social/posts/</loc>
-    <lastmod>2023-02-04T07:13:41+00:00</lastmod>
+    <lastmod>2023-05-22T20:16:47+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url><url>
     <loc>https://blog.alexander.social/series/</loc>
-    <lastmod>2023-02-04T07:13:41+00:00</lastmod>
+    <lastmod>2023-05-22T20:16:47+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url><url>
     <loc>https://blog.alexander.social/tags/</loc>
-    <lastmod>2023-02-04T07:13:41+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.alexander.social/series/featureswitches/</loc>
-    <lastmod>2022-08-09T07:38:30+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.alexander.social/series/kubernetes/</loc>
-    <lastmod>2022-08-09T15:38:30+08:00</lastmod>
+    <lastmod>2023-05-22T20:16:47+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url><url>
     <loc>https://blog.alexander.social/posts/feature-switches-intro/</loc>
-    <lastmod>2022-08-09T07:38:30+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.alexander.social/posts/getting-started/</loc>
-    <lastmod>2022-08-09T15:38:30+08:00</lastmod>
+    <lastmod>2023-05-18T20:16:47+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url><url>
     <loc>https://blog.alexander.social/about/</loc>
-    <lastmod>2019-02-28T00:00:00+00:00</lastmod>
+    <lastmod>2023-02-28T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url><url>
     <loc>https://blog.alexander.social/archive/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url><url>
     <loc>https://blog.alexander.social/categories/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
 </urlset>

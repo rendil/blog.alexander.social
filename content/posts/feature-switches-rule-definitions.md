@@ -1,8 +1,8 @@
 +++
 title = "Feature Switch Rule Definitions"
-date = "2023-05-22T20:16:47.433Z"
+date = "2023-05-23T20:16:47.433Z"
 header_img = ""
-toc = "2023-05-22T20:16:47.433Z"
+toc = "2023-05-23T20:16:47.433Z"
 tags = [ "guide", "feature-switches" ]
 categories = [ ]
 series = [ "Feature Switches" ]
@@ -15,6 +15,13 @@ A feature switch can be defined in many different ways, each with their own pros
 
 Before deciding on what a feature switch looks like, you'll probably want to ask yourself a few questions:
 * Do I want to store feature switches in a database or on a filesystem (eg, in git)?
+|             | Database             | git               | 
+| ----------- | -------------------- | ----------------- |
+| Propagation | Immediate, automatic | Needs to be setup |
+| Audit trail | Needs to be built    | Automatic         |
+| Code review | Needs to be built    | Automatic (if already setup) |
+| Local tests | Requires dev DB      | Uses local files  |
+
   * A database is automatically distributed, making the switches accessible anywhere the database can be accessed. While storing in git would mean you need a way to distribute the files to any production server that needs them.
   * Storing in git means that you can take advantage of code review processes to gate changes, but it might also slow down how quickly those changes are rolled out.
   * Storing in git allows developers to test their feature switches in a local file without having to use a staging database.
