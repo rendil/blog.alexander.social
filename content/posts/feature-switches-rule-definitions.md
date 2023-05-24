@@ -17,7 +17,7 @@ Before deciding on what a feature switch looks like, you'll need to ask yourself
 
 #### Database or filesystem?
 
-Perhaps to biggest question to ask is where to store/retrieve your feature switches. There's no right or wrong answer here.
+Perhaps the biggest question to ask is where to store/retrieve your feature switches.
 
 Here are some of the key considerations:
 * A database is automatically distributed, making the switches accessible anywhere the database can be accessed. While storing in git would mean you need a way to distribute the files to any production server that needs them.
