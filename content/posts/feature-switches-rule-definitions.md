@@ -13,8 +13,18 @@ comment = true
 
 A feature switch can be defined in many different ways, each with their own pros and cons.
 
-Before deciding on what a feature switch looks like, you'll probably want to ask yourself a few questions:
-* Do I want to store feature switches in a database or on a filesystem (eg, in git)?
+Before deciding on what a feature switch looks like, you'll need to ask yourself a few questions.
+
+#### Database or filesystem?
+
+Perhaps to biggest question to ask is where to store/retrieve your feature switches. There's no right or wrong answer here.
+
+Here are some of the key considerations:
+* A database is automatically distributed, making the switches accessible anywhere the database can be accessed. While storing in git would mean you need a way to distribute the files to any production server that needs them.
+* Storing in git means that you can take advantage of code review processes to gate changes, but it might also slow down how quickly those changes are rolled out.
+* Storing in git allows developers to test their feature switches in a local file without having to use a staging database.
+* Git logs provide a built in audit log of changes, whereas this is something that you'd need to build yourself if they were stored in a DB.
+
 |             | Database             | git               | 
 | ----------- | -------------------- | ----------------- |
 | Propagation | Immediate, automatic | Needs to be setup |
@@ -22,16 +32,31 @@ Before deciding on what a feature switch looks like, you'll probably want to ask
 | Code review | Needs to be built    | Automatic (if already setup) |
 | Local tests | Requires dev DB      | Uses local files  |
 
-  * A database is automatically distributed, making the switches accessible anywhere the database can be accessed. While storing in git would mean you need a way to distribute the files to any production server that needs them.
-  * Storing in git means that you can take advantage of code review processes to gate changes, but it might also slow down how quickly those changes are rolled out.
-  * Storing in git allows developers to test their feature switches in a local file without having to use a staging database.
-  * Git logs provide a built in audit log of changes, whereas this is something that you'd need to build yourself if they were stored in a DB.
-* Should a feature switch be able to change multiple values?
-* What sort of metadata should I store with my feature switches?
-  * Do I need ownership information? A description?
-* Where do default values get stored?
-* Should there be any logical grouping of feature switch rules? (eg, if there are multiple rules that all impact the same feature names)
-* How do we handle the case where multiple rules match, but set conflicting values for the same feature name?
+I would definitely lean toward file-based unless you absolutely need immediate propagation or are unable to distribute files to your services after they've already been deployed.
+
+#### Should a feature switch be able to change multiple values?
+
+It's not unusual for developers to want to change two features with a single rule. You could imagine setting several values based on a rule like `deviceOS == 'iOS'`, for example.
+
+The logic required to support this isn't too complex, so I would definitely lean toward allowing multiple values for a single rule.
+
+#### What sort of metadata should I store with my feature switches?
+
+This largely depends on your organization. At the least, you will want a name / description for your switches. Some organizations may also want to define an owner and/or oncall contact information.
+
+#### Where do default values get stored?
+
+In a relational database you may want to setup a `default_values` table. In a file-based system, you could have a separate file that stores all default values, but it might feel more natural to store defaults along with the rules that can change them.
+
+#### Should there be any logical grouping of feature switch rules?
+
+It's very common to have multiple rules that all impact the same feature names, creating an implicit relationship between those rules. It will be helpful to codify these relationships into something more explicit. For a file-based system, I would recommend each file contain a group of related rules. In a relational database, you would create a `groups` table and a related `rule_groups` association table.
+
+#### How do we handle conflicts?
+
+In even the most basic feature switch ecosystem, you will run into the case where multiple rules match, but set conflicting values for the same feature name. We will need to define a priority to our rules, either implicitly (eg, prioritizing rules based on the order they were defined) or explicitly (eg, assigning each rule a number and prioritizing based on that number).
+
+## Choices
 
 For this series, we will:
 1. Store our feature switches on a filesystem in [YAML](https://en.wikipedia.org/wiki/YAML) format
@@ -39,7 +64,7 @@ For this series, we will:
 3. Allow a single rule to change multiple feature values
 4. Store name/description as our only metadata
 5. Store default values for features along with the switches that set them
-6. Specify an explicit priority for dealing with conflicts
+6. Use an implicit priority for dealing with conflicts. Rules defined further down in the file will take precedence over those defined earlier
 
 Let's take a moment to walk through a skeleton feature switch file.
 ```yaml
@@ -47,23 +72,23 @@ fs_group:
   name: "Color scheme based on locale + device"
   feature_switches:
     - description: "White background for Canadian users"
-      priority: 49
       featureValues:
         - backgroundColor: "white"
         - foregroundColor: "red"
       rule:
         <rule definition intentionally left for later>
     - description: "Red background for older iOS users"
-      priority: 50
       featureValues:
         - backgroundColor: "red"
       rule:
         <rule definition intentionally left for later>
 ```
 
-Each file defines a group of logically-connected feature switch rules. Above, we have 2 separate rules in a single file that both deal with changing the color scheme. The first rule targets Canadian users and sets both a `backgroundColor` and `foregroundColor`. The second rule targets iOS users running an older version of our app and only sets the `backgroundColor`. We've assigned them a priority, where higher numbers take precedence if more than one rule tries to assign a value to the same feature.
+Each file defines a group of logically-connected feature switch rules. Above, we have 2 separate rules in a single file that both deal with changing the color scheme. The first rule targets Canadian users and sets both a `backgroundColor` and `foregroundColor`. The second rule targets iOS users running an older version of our app and only sets the `backgroundColor`. Note that the second rule is given a higher priority because it is defined later in the file.
 
-However, there's a little bit of nuance in dealing with conflicts here. What do we do if the user is both Canadian, and using an older iOS device? Technically, they only conflict on the background color. However, if we assign the `foregroundColor` from the first rule (`"red"`), and the `backgroundColor` from the second rule (also `"red"`!), we'll run into a terrible user experience (and perhaps unexpected behavior from the developer's point of view). We also need to consider the scenario where a rule in a separate file might also impact the `backgroundColor` or `foregroundColor`. How do we resolve cross-file conflicts?
+There's a little bit of nuance in dealing with conflicts here. For example, what do we do if the user is both Canadian and using an older iOS device? Technically, they only conflict on the `backgroundColor`. However, if we assign the `foregroundColor` from the first rule (`"red"`), and the `backgroundColor` from the second rule (also `"red"`!), we'll run into a terrible user experience (and perhaps unexpected behavior from the developer's point of view).
+
+We also need to consider the scenario where a rule in a separate file might also impact the `backgroundColor` or `foregroundColor`. How do we resolve cross-file conflicts?
 
 We can solve these problems by imposing some new restrictions:
 >1. Every rule in the same group must provide values for the same set of features. Meaning if one rule in the group provides a `backgroundColor` and another rule provides `foregroundColor`, then all rules in the group must provide both a `backgroundColor` and `foregroundColor`.
@@ -79,14 +104,12 @@ fs_group:
     - foregroundColor: "white"
   feature_switches:
     - description: "White background for Canadian users"
-      priority: 49
       featureValues:
         - backgroundColor: "white"
         - foregroundColor: "red"
       rule:
         <rule definition intentionally left for later>
     - description: "Red background for older iOS users"
-      priority: 50
       featureValues:
         - backgroundColor: "red"
         # there is an implicit foregroundColor: "white" from the
@@ -121,7 +144,6 @@ fs_group:
     - foregroundColor: "white"
   feature_switches:
     - description: "White background for CA users + newer iOS users"
-      priority: 49
       featureValues:
         - backgroundColor: "white"
         - foregroundColor: "red"
@@ -153,7 +175,6 @@ fs_group:
     - foregroundColor: "white"
   feature_switches:
     - description: "White background for CA users + newer iOS users"
-      priority: 49
       featureValues:
         - backgroundColor: "white"
         - foregroundColor: "red"
@@ -179,7 +200,6 @@ fs_group:
     - foregroundColor: "white"
   feature_switches:
     - description: "White background for CA users + newer iOS users"
-      priority: 49
       featureValues:
         - backgroundColor: "white"
         - foregroundColor: "red"
