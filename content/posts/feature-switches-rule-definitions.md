@@ -28,9 +28,9 @@ Before deciding on what a feature switch looks like, you'll probably want to ask
 
 For this series, we will:
 1. Store our feature switches on a filesystem in [YAML](https://en.wikipedia.org/wiki/YAML) format
-2. Allow multiple rules to exist in a single file
-3. Allow a single rule to change multiple feature switch values
-4. Allow name/description as our only metadata
+2. Group rules together that modify the same features into a single file
+3. Allow a single rule to change multiple feature values
+4. Store name/description as our only metadata
 5. Store default values for features along with the switches that set them
 6. Specify an explicit priority for dealing with conflicts
 
@@ -56,12 +56,13 @@ fs_group:
 
 Each file defines a group of logically-connected feature switch rules. Above, we have 2 separate rules in a single file that both deal with changing the color scheme. The first rule targets Canadian users and sets both a `backgroundColor` and `foregroundColor`. The second rule targets iOS users running an older version of our app and only sets the `backgroundColor`. We've assigned them a priority, where higher numbers take precedence if more than one rule tries to assign a value to the same feature.
 
-However, there's a little bit of nuance in dealing with conflicts here. What do we do if the user is both Canadian, and using an older iOS device? Technically, they only conflict on the background color. However, if we assign the foregroundColor from the first rule (`"red"`), and the backgroundColor from the second rule (also `"red"`!), we'll run into a terrible user experience (and perhaps unexpected behavior from the developer's point of view).
+However, there's a little bit of nuance in dealing with conflicts here. What do we do if the user is both Canadian, and using an older iOS device? Technically, they only conflict on the background color. However, if we assign the `foregroundColor` from the first rule (`"red"`), and the `backgroundColor` from the second rule (also `"red"`!), we'll run into a terrible user experience (and perhaps unexpected behavior from the developer's point of view). We also need to consider the scenario where a rule in a separate file might also impact the `backgroundColor` or `foregroundColor`. How do we resolve cross-file conflicts?
 
-We can solve the problem by imposing a new restriction:
->Every rule in the same group must provide values for the same set of features. Meaning if one rule in the group provides a `backgroundColor`, then all rules must provide a `backgroundColor`.
+We can solve these problems by imposing some new restrictions:
+>1. Every rule in the same group must provide values for the same set of features. Meaning if one rule in the group provides a `backgroundColor` and another rule provides `foregroundColor`, then all rules in the group must provide both a `backgroundColor` and `foregroundColor`.
+>2. Two files cannot provide a value for the same feature. This means that there can only be one file that provides a value for `backgroundColor` and we do not need to worry about rules that conflict in other files.
 
-With this restriction in place, we can further simplify things by specifying default values for each of those features at the top-level of our group. Now rules must either specify all values explicitly, or fallback on default values implicitly.
+With these restrictions in place, we can further simplify things by specifying default values for each of those features at the top-level of our group. Now rules must either specify all values explicitly, or fallback on default values implicitly.
 
 ```yaml
 fs_group:
@@ -81,6 +82,8 @@ fs_group:
       priority: 50
       featureValues:
         - backgroundColor: "red"
+        # there is an implicit foregroundColor: "white" from the
+        # defaults section above
       rule:
         <rule definition intentionally left for later>
 ```
