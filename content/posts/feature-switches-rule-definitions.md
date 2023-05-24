@@ -11,7 +11,7 @@ comment = true
 
 ## Feature switch syntax
 
-A feature switch can be defined in many different ways, each with their own pros and cons.
+The feature switch syntax we decide on will be based on where the switches are being stored, whether or not rules are grouped together, and what type of external tooling we have.
 
 Before deciding on what a feature switch looks like, you'll need to ask yourself a few questions.
 
@@ -32,11 +32,13 @@ Here are some of the key considerations:
 | Code review | Needs to be built    | Automatic (if already setup) |
 | Local tests | Requires dev DB      | Uses local files  |
 
+Generally speaking, going with a database will require more tooling to be built but provides faster propagation.
+
 I would definitely lean toward file-based unless you absolutely need immediate propagation or are unable to distribute files to your services after they've already been deployed.
 
 #### Should a feature switch be able to change multiple values?
 
-It's not unusual for developers to want to change two features with a single rule. You could imagine setting several values based on a rule like `deviceOS == 'iOS'`, for example.
+It's not unusual for developers to want to change two or more features with a single rule. You could imagine setting several values based on a rule like `deviceOS == 'iOS'`, for example.
 
 The logic required to support this isn't too complex, so I would definitely lean toward allowing multiple values for a single rule.
 
